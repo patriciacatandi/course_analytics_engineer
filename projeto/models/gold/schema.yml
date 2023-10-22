@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: tb_availability_data
+    description: "Availability variation per day"
+    columns:
+      - name: date
+        description: "Date"
+        tests:
+          - unique
+          - not_null
+      - name: total_available
+        description: "Total available places"
+      - name: percent_available
+        description: "Percentage of total available places"
+
+  - name: tb_mean_price_data
+    description: "Mean price of each day"
+    columns:
+      - name: date
+        description: "Date"
+        tests:
+          - unique
+          - not_null
+      - name: mean_price
+        description: "Mean price of that date"
+      - name: mean_adjusted_price
+        description: "Mean adjusted price of that date"
+
+  - name: tb_mean_neighbourhood
+    description: "Availability variation per neighbourhood"
+    columns:
+      - name: neighbourhood
+        description: "Date"
+        tests:
+          - unique
+          - not_null
+      - name: mean_price
+        description: "Mean price of that neighbourhood"
+      - name: mean_accommodates
+        description: "Mean accommodate available"
+      - name: mean_bedrooms
+        description: "Mean bedrooms available"
+      - name: mean_beds
+        description: "Mean beds available"
