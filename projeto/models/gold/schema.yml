@@ -1,5 +1,12 @@
 version: 2
 
+sources:
+  - name: postgres-dbt-raw
+    tables:
+      - name: public.silver_calendar
+      - name: public.silver_reviews
+      - name: public.silver_listings
+
 models:
   - name: tb_availability_data
     description: "Availability variation per day"
