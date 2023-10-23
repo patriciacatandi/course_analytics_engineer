@@ -8,7 +8,7 @@ sources:
       - name: public.silver_listings
 
 models:
-  - name: tb_availability_data
+  - name: tb_availability_date
     description: "Availability variation per day"
     columns:
       - name: date
@@ -18,10 +18,16 @@ models:
           - not_null
       - name: total_available
         description: "Total available places"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
       - name: percent_available
         description: "Percentage of total available places"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
 
-  - name: tb_mean_price_data
+  - name: tb_mean_price_date
     description: "Mean price of each day"
     columns:
       - name: date
@@ -31,8 +37,14 @@ models:
           - not_null
       - name: mean_price
         description: "Mean price of that date"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
       - name: mean_adjusted_price
         description: "Mean adjusted price of that date"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
 
   - name: tb_mean_neighbourhood
     description: "Availability variation per neighbourhood"
@@ -44,9 +56,22 @@ models:
           - not_null
       - name: mean_price
         description: "Mean price of that neighbourhood"
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              inclusive: true
       - name: mean_accommodates
         description: "Mean accommodate available"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
       - name: mean_bedrooms
         description: "Mean bedrooms available"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
       - name: mean_beds
         description: "Mean beds available"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
