@@ -1,4 +1,5 @@
 SELECT 
+    {{ dbt_utils.generate_surrogate_key(['municipio', 'estado']) }} as id,
     cidade,
     estado,
     produto,

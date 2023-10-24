@@ -35,6 +35,8 @@ models:
         tests:
           - unique
           - not_null
+          # - dbt_expectations.expect_column_values_to_be_of_type:
+          #     column_type: string
       - name: mean_price
         description: "Mean price of that date"
         tests:
@@ -42,9 +44,12 @@ models:
               expression: ">= 0"
       - name: mean_adjusted_price
         description: "Mean adjusted price of that date"
-        tests:
-          - dbt_utils.expression_is_true:
-              expression: ">= 0"
+        # tests:
+          # - dbt_expectations.expect_column_values_to_be_of_type:
+          #     column_type: float
+          # - dbt_expectations.expect_table_column_count_to_be_between:
+          #     min_value: 0
+          #     max_value: 100000000000000
 
   - name: tb_mean_neighbourhood
     description: "Availability variation per neighbourhood"

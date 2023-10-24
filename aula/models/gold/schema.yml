@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: tb_media_precos
+    description: "Media de preços por produto, cidade e dia"
+    columns:
+      - name: cidade
+        description: "Cidade"
+        tests:
+          - not_null
+      - name: estado
+        description: "Estado"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['RJ', 'AC', 'PR']
+      - name: produto
+        description: "Produto"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['GASOLINA', 'ETANOL', 'GASOLINA ADITIVADA']
+      - name: media_preco
+        description: "media_preco"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
