@@ -1,7 +1,8 @@
 {{
     config(
         unique_key="neighbourhood",
-        on_schema_changes="sync_all_columns"
+        on_schema_changes="sync_all_columns",
+        sort="neighbourhood",
     )
 }}
 SELECT
