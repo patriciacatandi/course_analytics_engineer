@@ -16,16 +16,22 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: text
       - name: total_available
         description: "Total available places"
         tests:
           - dbt_utils.expression_is_true:
               expression: ">= 0"
+          # - dbt_expectations.expect_column_values_to_be_of_type:
+          #     column_type: numeric
       - name: percent_available
         description: "Percentage of total available places"
         tests:
           - dbt_utils.expression_is_true:
               expression: ">= 0"
+          # - dbt_expectations.expect_column_values_to_be_of_type:
+          #     column_type: numeric
 
   - name: tb_mean_price_date
     description: "Mean price of each day"
@@ -35,18 +41,20 @@ models:
         tests:
           - unique
           - not_null
-          # - dbt_expectations.expect_column_values_to_be_of_type:
-          #     column_type: string
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: text
       - name: mean_price
         description: "Mean price of that date"
         tests:
           - dbt_utils.expression_is_true:
               expression: ">= 0"
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: numeric
       - name: mean_adjusted_price
         description: "Mean adjusted price of that date"
-        # tests:
-          # - dbt_expectations.expect_column_values_to_be_of_type:
-          #     column_type: float
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: numeric
           # - dbt_expectations.expect_table_column_count_to_be_between:
           #     min_value: 0
           #     max_value: 100000000000000
@@ -59,6 +67,8 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: text
       - name: mean_price
         description: "Mean price of that neighbourhood"
         tests:

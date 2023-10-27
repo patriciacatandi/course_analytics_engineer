@@ -1,0 +1,81 @@
+version: 2
+
+sources:
+  - name: postgres-dbt-raw
+    tables:
+      - name: public.bronze_calendar
+      - name: public.bronze_reviews
+      - name: public.bronze_listings
+
+models:
+  - name: silver_calendar2
+    description: "Calendar"
+    columns:
+      - name: date
+        description: "Date"
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: text
+      - name: listing_id
+        description: "Id of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: available
+        description: "Boolean if listing is available"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: price
+        description: "Price of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: adjusted_price
+        description: "Adjusted price of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: minimum_nights
+        description: "Minimum nights of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: maximum_nights
+        description: "Maximum nights of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+  - name: silver_reviews2
+    description: "Reviews"
+    columns:
+      - name: date
+        description: "Date"
+        tests:
+          - unique
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: text
+      - name: listing_id
+        description: "Id of the listing"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: id
+        description: "Id of the review"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: reviewer_id
+        description: "Reviwer Id"
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+      - name: reviewer_name
+        description: "Name of the reviewer"
+      - name: comments
+        description: "Comment made by the reviwer for that listing"
+
