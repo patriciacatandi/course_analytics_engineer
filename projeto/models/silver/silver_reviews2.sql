@@ -1,5 +1,5 @@
 {{ config(
-  enabled=false
+  enabled=true
 ) }}
 SELECT
     CAST(listing_id AS bigint) listing_id,
